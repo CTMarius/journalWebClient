@@ -1,0 +1,44 @@
+.body{
+  background: #717171;
+  text-align: left;
+  padding: 15px;
+}
+.app {
+  padding: 70px 25px;
+  width: 50%;
+  background: #1abc9c;
+  text-align: left;
+}
+.textarea {
+  padding: 25px;
+  height: 200px;
+  width: 95%;
+  background: white;
+  text-align: left;  
+}
+.savebutton {
+  display: block;
+  width: 10%;
+  border: none;
+  background-color: #d8d8d8;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+.savebutton-active {
+  display: block;
+  width: 10%;
+  border: none;
+  background-color: #F4D03F;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+.datepicker{
+  padding: 15px 0px;
+}
+.title{
+  
+}
