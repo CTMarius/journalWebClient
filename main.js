@@ -36,7 +36,7 @@ function setTodaysDate(){
 }
 
 function postMethod(content, date){
-    let url = 'https://11a6264f.ngrok.io/entry';
+    let url = 'http://83f0e169.ngrok.io/entry';
     let body = { 'name': content, 'Created_date': date}
     const xhr = new XMLHttpRequest()
     xhr.open('POST', url, true)
@@ -52,7 +52,7 @@ function postMethod(content, date){
 
 function getMethod(){
     document.getElementById('textarea').value='';
-    let url = 'https://11a6264f.ngrok.io/entry';
+    let url = 'http://83f0e169.ngrok.io/entry';
     const xhr = new XMLHttpRequest()
     xhr.open('GET', url, true)
     xhr.setRequestHeader('Content-type', 'application/json')
