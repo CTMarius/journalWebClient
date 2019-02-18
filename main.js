@@ -1,3 +1,5 @@
+let baseUrl = "https://83f0e169.ngrok.io";
+
 function isText(){
     const element = document.getElementById('save');
     const text = document.getElementById('textarea').value;
@@ -36,7 +38,7 @@ function setTodaysDate(){
 }
 
 function postMethod(content, date){
-    let url = 'http://83f0e169.ngrok.io/entry';
+    let url = baseUrl + '/entry';
     let body = { 'name': content, 'Created_date': date}
     const xhr = new XMLHttpRequest()
     xhr.open('POST', url, true)
@@ -52,7 +54,7 @@ function postMethod(content, date){
 
 function getMethod(){
     document.getElementById('textarea').value='';
-    let url = 'http://83f0e169.ngrok.io/entry';
+    let url = baseUrl + '/entry';
     const xhr = new XMLHttpRequest()
     xhr.open('GET', url, true)
     xhr.setRequestHeader('Content-type', 'application/json')
