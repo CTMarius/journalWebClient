@@ -1,3 +1,4 @@
+//nodejs server url
 let baseUrl = "https://journaltestapi.herokuapp.com";
 
 function isText(){
