@@ -67,7 +67,9 @@ function getMethod(){
         text.forEach(function (element, index) {
             if(element['Created_date'] === d){
                 document.getElementById('textarea').value = element.name;
-            }
+            } else {
+      document.getElementById('textarea').value = 'No entries for today.'
+    }
         })
     }
 
