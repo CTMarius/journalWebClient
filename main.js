@@ -1,5 +1,5 @@
 //nodejs server url
-let baseUrl = "https://journaltestapi.herokuapp.com";
+let baseUrl = "";
 
 function isText(){
     const element = document.getElementById('save');
