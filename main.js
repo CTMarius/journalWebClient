@@ -3,7 +3,7 @@ let baseUrl = "";
 
 function isText(){
     const element = document.getElementById('save');
-    const text = document.getElementById('textarea').value;
+    const text = document.getElementById('textarea').value;    
     if(text){
         element.disabled=false;
     }else{
@@ -15,16 +15,15 @@ function setTodaysDate(){
     var dateControl = document.getElementById('datepicker');
     var title = document.getElementById('titlebar');
     var MyDate = new Date();
-    var MyDateString;
+    var MyDateString;    
     MyDate.setDate(MyDate.getDate());
     MyDateString =  MyDate.getFullYear() + '-' + ('0' + (MyDate.getMonth()+1)).slice(-2) + '-' + ('0' + MyDate.getDate()).slice(-2);
     dateControl.value = MyDateString.toString();
-
     //setup the header
     text = MyDateString.toString();
     var h1 = document.createElement('h1');
     var d = new Date();
-    var weekday = new Array(7);
+    var weekday = new Array(7);    
     weekday[0] =  "Sunday";
     weekday[1] = "Monday";
     weekday[2] = "Tuesday";
@@ -41,14 +40,12 @@ function setTodaysDate(){
 function postMethod(content, date){
     let url = baseUrl + '/entry';
     let body = { 'name': content, 'Created_date': date}
-    const xhr = new XMLHttpRequest()
+    const xhr = new XMLHttpRequest();    
     xhr.open('POST', url, true)
     xhr.setRequestHeader('Content-type', 'application/json')
-
     console.log(JSON.stringify(body))
     xhr.send(JSON.stringify(body))
-    xhr.onload = function() {
-        //throw error or do nothing
+    xhr.onload = function() {       
         //alert(xhr.responseText)
     }
 }
@@ -56,7 +53,7 @@ function postMethod(content, date){
 function getMethod(){
     document.getElementById('textarea').value='';
     let url = baseUrl + '/entry';
-    const xhr = new XMLHttpRequest()
+    const xhr = new XMLHttpRequest();    
     xhr.open('GET', url, true)
     xhr.setRequestHeader('Content-type', 'application/json')
     xhr.send()
@@ -70,18 +67,15 @@ function getMethod(){
             }
         })
     }
-
 }
-
 
 function saveContent(){
     var date = document.getElementById('datepicker').value;
     const content = document.getElementById('textarea').value;
-    const element = document.getElementById('save');
+    const element = document.getElementById('save');    
     if(text && !element.disabled){
         postMethod(content, date);
-    }else{
-        //throw error or do nothing
+    }else{        
         console.log(content);
         console.log(date);
         console.log(element.disabled);
