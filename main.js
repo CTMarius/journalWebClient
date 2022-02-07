@@ -44,10 +44,7 @@ function postMethod(content, date){
     xhr.open('POST', url, true)
     xhr.setRequestHeader('Content-type', 'application/json')
     console.log(JSON.stringify(body))
-    xhr.send(JSON.stringify(body))
-    xhr.onload = function() {       
-        //alert(xhr.responseText)
-    }
+    xhr.send(JSON.stringify(body))    
 }
 
 function getMethod(){
