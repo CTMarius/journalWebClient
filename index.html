@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>	 
-  <style>@import url("style.css");</style>
-  </head>
-  <script src="main.js"></script>
-  <body onload='setTodaysDate(); getMethod()' class='body'>
-  <div class='app'>
-      <div id='titlebar'></div>      
-      <div class='datepicker'>
-         <label>Select date:</label>
-          <input type="date" id="datepicker" onchange="getMethod()"></input>
+   <head>
+      <style>@import url("style.css");</style>
+   </head>
+   <script src="main.js"></script>
+   <body onload='setTodaysDate(); getMethod()' class='body'>
+      <div class='app'>
+         <div id='titlebar'></div>
+         <div class='datepicker'>
+            <label>Select date:</label>
+            <input type="date" id="datepicker" onchange="getMethod()"></input>
+         </div>
+         <div>
+            <textarea id='textarea' class='textarea' oninput='isText()'></textarea>         
+         </div>
+         <div>
+            <button id='save' class='savebutton' onclick='saveContent()' disabled>Save</button> 
+         </div>
       </div>
-       <div>
-         <textarea id='textarea' class='textarea' oninput='isText()'></textarea>         
-       </div>
-       <div>
-         <button id='save' class='savebutton' onclick='saveContent()' disabled>Save</button> 
-      </div>                
-    </div>   
-  </body>
+   </body>
 </html>
