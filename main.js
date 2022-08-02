@@ -1,30 +1,30 @@
 //nodejs server url
 let baseUrl = "https://journaltestapi.herokuapp.com";
 
-function isText(){
+function isText() {
     const element = document.getElementById('save');
-    const text = document.getElementById('textarea').value;    
-    if(text){
-        element.disabled=false;
-    }else{
-        element.disabled=true;
+    const text = document.getElementById('textarea').value;
+    if (text) {
+        element.disabled = false;
+    } else {
+        element.disabled = true;
     }
 }
 
-function setTodaysDate(){
+function setTodaysDate() {
     var dateControl = document.getElementById('datepicker');
     var title = document.getElementById('titlebar');
     var MyDate = new Date();
-    var MyDateString;    
+    var MyDateString;
     MyDate.setDate(MyDate.getDate());
-    MyDateString =  MyDate.getFullYear() + '-' + ('0' + (MyDate.getMonth()+1)).slice(-2) + '-' + ('0' + MyDate.getDate()).slice(-2);
+    MyDateString = MyDate.getFullYear() + '-' + ('0' + (MyDate.getMonth() + 1)).slice(-2) + '-' + ('0' + MyDate.getDate()).slice(-2);
     dateControl.value = MyDateString.toString();
     //setup the header
     text = MyDateString.toString();
     var h1 = document.createElement('h1');
     var d = new Date();
-    var weekday = new Array(7);    
-    weekday[0] =  "Sunday";
+    var weekday = new Array(7);
+    weekday[0] = "Sunday";
     weekday[1] = "Monday";
     weekday[2] = "Tuesday";
     weekday[3] = "Wednesday";
@@ -37,20 +37,23 @@ function setTodaysDate(){
 
 }
 
-function postMethod(content, date){
+function postMethod(content, date) {
     let url = baseUrl + '/entry';
-    let body = { 'name': content, 'Created_date': date}
-    const xhr = new XMLHttpRequest();    
+    let body = {
+        'name': content,
+        'Created_date': date
+    }
+    const xhr = new XMLHttpRequest();
     xhr.open('POST', url, true)
     xhr.setRequestHeader('Content-type', 'application/json')
     console.log(JSON.stringify(body))
-    xhr.send(JSON.stringify(body))    
+    xhr.send(JSON.stringify(body))
 }
 
-function getMethod(){
-    document.getElementById('textarea').value='';
+function getMethod() {
+    document.getElementById('textarea').value = '';
     let url = baseUrl + '/entry';
-    const xhr = new XMLHttpRequest();    
+    const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true)
     xhr.setRequestHeader('Content-type', 'application/json')
     xhr.send()
@@ -58,21 +61,21 @@ function getMethod(){
         let text = JSON.parse(xhr.responseText);
         let needle = document.getElementById('datepicker').value;
         let d = new Date(needle).toISOString()
-        text.forEach(function (element, index) {
-            if(element['Created_date'] === d){
+        text.forEach(function(element, index) {
+            if (element['Created_date'] === d) {
                 document.getElementById('textarea').value = element.name;
             }
         })
     }
 }
 
-function saveContent(){
+function saveContent() {
     var date = document.getElementById('datepicker').value;
     const content = document.getElementById('textarea').value;
-    const element = document.getElementById('save');    
-    if(text && !element.disabled){
+    const element = document.getElementById('save');
+    if (text && !element.disabled) {
         postMethod(content, date);
-    }else{        
+    } else {
         console.log(content);
         console.log(date);
         console.log(element.disabled);
