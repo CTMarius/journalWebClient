@@ -43,27 +43,44 @@ max-width: 100%;
 display: flex;
 flex-direction: column;
 }
+
+/* Styles for the Save button */
 .savebutton {
   display: block;
   width: 10%;
   border: none;
   background-color: #d8d8d8;
-  padding: 14px 28px;
   font-size: 16px;
   cursor: pointer;
   text-align: center;
   margin-top: 25px;
+
+  /* Responsive styles for mobile devices */
+  min-width: 100px; /* Adjust the value as needed */
+  padding: 10px;    /* Adjust the padding as needed */
 }
+
+/* Styles for the Save button when active */
 .savebutton-active {
   display: block;
   width: 10%;
   border: none;
   background-color: #F4D03F;
-  padding: 14px 28px;
   font-size: 16px;
   cursor: pointer;
   text-align: center;
+
+  /* Responsive styles for mobile devices in the active state */
+  min-width: 100px; /* Adjust the value as needed */
+  padding: 10px;    /* Adjust the padding as needed */
 }
+
 .datepicker{
   padding: 15px 0px;
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding: 10px;
+  }  
 }

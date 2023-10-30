@@ -1,83 +1,75 @@
-//nodejs server url
-let baseUrl = "";
-
-function isText(){
+const checkText = () => {
     const element = document.getElementById('save');
-    const text = document.getElementById('textarea').value;    
-    if(text){
-        element.disabled=false;
-    }else{
-        element.disabled=true;
-    }
-}
-
-function setTodaysDate(){
-    var dateControl = document.getElementById('datepicker');
-    var title = document.getElementById('titlebar');
-    var MyDate = new Date();
-    var MyDateString;    
+    const text = document.getElementById('textarea').value;
+    element.disabled = !text;
+  };
+  
+  const setTodaysDate = () => {
+    const dateControl = document.getElementById('datepicker');    
+    const MyDate = new Date();
     MyDate.setDate(MyDate.getDate());
-    MyDateString =  MyDate.getFullYear() + '-' + ('0' + (MyDate.getMonth()+1)).slice(-2) + '-' + ('0' + MyDate.getDate()).slice(-2);
-    dateControl.value = MyDateString.toString();
-    //setup the header
-    text = MyDateString.toString();
-    var h1 = document.createElement('h1');
-    var d = new Date();
-    var weekday = new Array(7);    
-    weekday[0] =  "Sunday";
-    weekday[1] = "Monday";
-    weekday[2] = "Tuesday";
-    weekday[3] = "Wednesday";
-    weekday[4] = "Thursday";
-    weekday[5] = "Friday";
-    weekday[6] = "Saturday";
-    var n = weekday[d.getDay()];
-    h1.appendChild(document.createTextNode(n + ' ' + text));
+    const MyDateString = MyDate.toISOString().split('T')[0];
+    dateControl.value = MyDateString;
+    const text = MyDateString;
+    const h1 = document.createElement('h1');
+    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const dayOfWeek = weekday[MyDate.getDay()];
+    h1.textContent = `${dayOfWeek} ${text}`;
     document.body.prepend(h1);
-
-}
-
-function postMethod(content, date){
-    let url = baseUrl + '/entry';
-    let body = { 'name': content, 'Created_date': date}
-    const xhr = new XMLHttpRequest();    
-    xhr.open('POST', url, true)
-    xhr.setRequestHeader('Content-type', 'application/json')
-    console.log(JSON.stringify(body))
-    xhr.send(JSON.stringify(body))
-    xhr.onload = function() {       
-        //alert(xhr.responseText)
-    }
-}
-
-function getMethod(){
-    document.getElementById('textarea').value='';
-    let url = baseUrl + '/entry';
-    const xhr = new XMLHttpRequest();    
-    xhr.open('GET', url, true)
-    xhr.setRequestHeader('Content-type', 'application/json')
-    xhr.send()
-    return xhr.onload = function() {
-        let text = JSON.parse(xhr.responseText);
-        let needle = document.getElementById('datepicker').value;
-        let d = new Date(needle).toISOString()
-        text.forEach(function (element, index) {
-            if(element['Created_date'] === d){
-                document.getElementById('textarea').value = element.name;
-            }
-        })
-    }
-}
-
-function saveContent(){
-    var date = document.getElementById('datepicker').value;
+  };
+  
+  const sendRequest = (method, url, data, callback) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open(method, url, true);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        callback(JSON.parse(xhr.responseText));
+      }
+    };
+    xhr.send(JSON.stringify(data));
+  };
+  
+  const postMethod = (content, date) => {
+    const baseUrl = 'https://example.com/api'; // Use HTTPS
+    const url = `${baseUrl}/entry`;
+    const body = { 'name': content, 'Created_date': date };
+  
+    sendRequest('POST', url, body, () => {
+      // Handle the response if needed
+    });
+  };
+  
+  const getMethod = () => {
+    const baseUrl = 'https://example.com/api'; // Use HTTPS
+    document.getElementById('textarea').value = '';
+    const needle = document.getElementById('datepicker').value;
+    const url = `${baseUrl}/entry?date=${encodeURIComponent(needle)}`;
+  
+    sendRequest('GET', url, null, (text) => {
+      const d = new Date(needle).toISOString();
+      const element = text.find((element) => element['Created_date'] === d);
+      if (element) {
+        document.getElementById('textarea').value = element.name;
+      }
+    });
+  };
+  
+  const saveContent = () => {
+    const date = document.getElementById('datepicker').value;
     const content = document.getElementById('textarea').value;
-    const element = document.getElementById('save');    
-    if(text && !element.disabled){
-        postMethod(content, date);
-    }else{        
-        console.log(content);
-        console.log(date);
-        console.log(element.disabled);
+    const element = document.getElementById('save');
+    if (content && !element.disabled) {
+      postMethod(content, date);
+    } else {
+      console.log(content);
+      console.log(date);
+      console.log(element.disabled);
     }
-}
+  };
+
+  const initializePage = () => {
+    setTodaysDate();
+    getMethod();
+  }
+  
