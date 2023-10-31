@@ -31,7 +31,7 @@ const checkText = () => {
   };
   
   const postMethod = (content, date) => {
-    const baseUrl = 'http://localhost:3000'; // Use HTTPS
+    const baseUrl = 'https://localhost:3000'; // Use HTTPS
     const url = `${baseUrl}/entry`;
     const body = { 'name': content, 'Created_date': date };
   
@@ -41,7 +41,7 @@ const checkText = () => {
   };
   
   const getMethod = () => {
-    const baseUrl = 'http://localhost:3000'; // Use HTTPS
+    const baseUrl = 'https://localhost:3000'; // Use HTTPS
     document.getElementById('textarea').value = '';
     const needle = document.getElementById('datepicker').value;
     const url = `${baseUrl}/entry?date=${encodeURIComponent(needle)}`;
